@@ -1,249 +1,203 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>MD FORHAD HOSSEN</title>
+<title>Flash Forhad</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-@keyframes gradientBG {
-0% {background-position: 0% 50%;}
-50% {background-position: 100% 50%;}
-100% {background-position: 0% 50%;}
+body{
+margin:0;
+font-family:Arial;
+color:white;
+background:black;
+text-align:center;
+overflow-x:hidden;
 }
 
-body {
-margin: 0;
-font-family: Arial, sans-serif;
-color: white;
-text-align: center;
-background: linear-gradient(-45deg, #ff00cc, #3333ff, #00ffcc, #ff6600);
-background-size: 400% 400%;
-animation: gradientBG 10s ease infinite;
+/* Canvas */
+canvas{position:fixed;top:0;left:0;z-index:-1}
+
+/* Loader */
+#loader{
+position:fixed;width:100%;height:100%;
+background:black;color:cyan;
+display:flex;justify-content:center;align-items:center;
+z-index:9999;font-size:20px;
 }
 
-.container { padding: 20px; }
-
-.logo-img {
-width: 120px;
-margin-top: 20px;
+/* Profile */
+.profile{
+width:140px;border-radius:50%;
+border:3px solid cyan;
+margin-top:20px;
+box-shadow:0 0 20px cyan;
+animation:float 3s infinite;
 }
 
-.neon-logo {
-font-size: 40px;
-font-weight: bold;
-margin-top: 10px;
-}
-
-.neon-logo .f {
-color: cyan;
-text-shadow: 0 0 15px cyan;
-}
-
-.neon-logo .h {
-color: yellow;
-text-shadow: 0 0 15px yellow;
-}
-
-.profile {
-width: 150px;
-height: 150px;
-border-radius: 50%;
-border: 4px solid white;
-margin-top: 15px;
-box-shadow: 0 0 25px cyan;
-animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-0% {transform: translateY(0);}
-50% {transform: translateY(-10px);}
-100% {transform: translateY(0);}
-}
-
-.section {
-margin-top: 40px;
-opacity: 0;
-transform: translateY(40px);
-transition: 0.8s;
-}
-
-.section.show {
-opacity: 1;
-transform: translateY(0);
-}
-
-.info-box {
-background: rgba(0,0,0,0.4);
-padding: 15px;
-border-radius: 10px;
-margin: 15px auto;
-width: 85%;
-}
-
-.skill {
-margin: 20px auto;
-text-align: left;
-width: 80%;
-}
-
-.skill-bar {
-background: rgba(255,255,255,0.2);
-border-radius: 20px;
-overflow: hidden;
-}
-
-.skill-fill {
-height: 12px;
-background: cyan;
-border-radius: 20px;
-}
-
-.btn {
-display: block;
-width: 80%;
-margin: 12px auto;
-padding: 12px;
-border-radius: 30px;
-text-decoration: none;
-font-weight: bold;
-color: white;
-transition: 0.3s;
-}
-
-.whatsapp {background: #25D366;}
-.telegram {background: #0088cc;}
-.facebook {background: #1877F2;}
-
-.instagram {
-background: linear-gradient(45deg,#feda75,#d62976,#962fbf);
-}
-
-.tiktok {
-background: black;
-border: 1px solid cyan;
-}
-
-.btn:hover {
-transform: scale(1.1);
-box-shadow: 0 0 20px cyan;
+@keyframes float{
+50%{transform:translateY(-10px)}
 }
 
 /* Typing */
-#typing {
-font-weight: bold;
-margin-top: 10px;
-color: cyan;
+#typing{color:cyan;font-weight:bold}
+
+/* Terminal */
+#terminal{
+background:black;color:#00ff00;
+padding:12px;margin:15px auto;
+width:85%;border-radius:10px;
+font-family:monospace;text-align:left;
+box-shadow:0 0 10px #00ff00;
 }
 
-/* Footer */
-.footer {
-margin-top: 40px;
-font-size: 13px;
-opacity: 0.9;
-color: cyan;
+/* Skills */
+.skill-bar{
+width:80%;margin:10px auto;
+background:#111;border-radius:20px;
+overflow:hidden;
 }
+.skill-fill{height:10px;width:0;background:cyan}
+
+/* Buttons */
+.btn{
+display:block;width:80%;
+margin:10px auto;padding:10px;
+border-radius:25px;
+color:white;text-decoration:none;
+transition:.3s;
+}
+.whatsapp{background:#25D366}
+.telegram{background:#0088cc}
+.facebook{background:#1877F2}
+.instagram{background:linear-gradient(45deg,#feda75,#d62976)}
+.tiktok{background:black;border:1px solid cyan}
+
+.btn:hover{
+transform:scale(1.1);
+box-shadow:0 0 15px cyan;
+}
+
+/* Chat */
+#chat{
+position:fixed;bottom:15px;right:15px;
+width:230px;background:black;
+border:1px solid cyan;border-radius:10px;
+}
+#chat h4{background:cyan;color:black;margin:0;padding:5px}
+#chat-body{height:120px;overflow:auto;padding:5px;text-align:left}
+#chat input{width:100%;border:none;padding:6px}
+
+/* Footer */
+.footer{margin:20px;color:cyan}
 </style>
 </head>
 
 <body>
 
-<div class="container">
-
-<img src="logofh.png" class="logo-img">
-
-<div class="neon-logo">
-<span class="f">F</span><span class="h">H</span>
-</div>
+<div id="loader">⚡ Booting...</div>
+<canvas id="bg"></canvas>
 
 <img src="20260212_100852.jpg" class="profile">
 
-<h1>MD FORHAD HOSSEN</h1>
-
+<h2>Flash Forhad ⚡</h2>
 <p id="typing"></p>
 
-<div class="info-box">
-<b>Nickname:</b> FH & X HUNTER <br>
-<b>Also Known As:</b> Flash Forhad ⚡ <br>
-<b>Relationship Status:</b> Single
-</div>
+<div id="terminal"></div>
 
-<div class="section">
-<h2>Experience</h2>
-<div class="info-box">
-Tutor <br>
-Admin at Cyber Team
-</div>
-</div>
+<!-- Skills -->
+Computer
+<div class="skill-bar"><div id="s1" class="skill-fill"></div></div>
 
-<div class="section">
-<h2>My Skills</h2>
+Social Media
+<div class="skill-bar"><div id="s2" class="skill-fill"></div></div>
 
-<div class="skill">
-Computer Knowledge - 40%
-<div class="skill-bar"><div class="skill-fill" style="width:40%"></div></div>
-</div>
+Cyber
+<div class="skill-bar"><div id="s3" class="skill-fill"></div></div>
 
-<div class="skill">
-Social Media Expert - 90%
-<div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
-</div>
+<!-- Buttons -->
+<a class="btn whatsapp" href="https://wa.me/8801722201376">WhatsApp</a>
+<a class="btn telegram" href="https://t.me/forhad6588">Telegram</a>
+<a class="btn facebook" href="https://www.facebook.com/profile.php?id=61576404372835">Facebook</a>
+<a class="btn instagram" href="https://www.instagram.com/itz_forhad_6588">Instagram</a>
+<a class="btn tiktok" href="https://www.tiktok.com/@itzforhad2472">TikTok</a>
 
-<div class="skill">
-Cyber Learning - 20%
-<div class="skill-bar"><div class="skill-fill" style="width:20%"></div></div>
-</div>
+<div class="footer">⚡ Made by Flash Forhad</div>
 
-</div>
-
-<div class="section">
-<h2>Personal Information</h2>
-<div class="info-box">
-District: Panchagarh <br>
-Upozilla: Atwary <br>
-Village: Dhamor Gachbari
-</div>
-</div>
-
-<a class="btn" href="mailto:forhadhossen6588@gmail.com">📧 Email</a>
-<a class="btn whatsapp" href="https://wa.me/8801722201376">💬 WhatsApp</a>
-<a class="btn telegram" href="https://t.me/forhad6588">📨 Telegram</a>
-<a class="btn facebook" href="https://www.facebook.com/profile.php?id=61576404372835">📘 Facebook</a>
-<a class="btn instagram" href="https://www.instagram.com/itz_forhad_6588">📸 Instagram</a>
-<a class="btn tiktok" href="https://www.tiktok.com/@itzforhad2472">🎵 TikTok</a>
-
-<div class="footer">
-⚡ Made by Flash Forhad
-</div>
-
+<!-- Chat -->
+<div id="chat">
+<h4>FH Bot 💬</h4>
+<div id="chat-body"></div>
+<input id="chat-input" placeholder="Type..." />
 </div>
 
 <script>
+// Loader
+window.onload=()=>loader.style.display="none";
+
 // Typing
-let text = "I don't follow, I lead 😎";
-let i = 0;
-function type() {
-if (i < text.length) {
-document.getElementById("typing").innerHTML += text.charAt(i);
-i++;
-setTimeout(type, 60);
-}
-}
-type();
+let t="I don't follow, I lead 😎";
+let i=0;
+(function type(){
+if(i<t.length){
+typing.innerHTML+=t[i++];
+setTimeout(type,50);
+}})();
 
-// Section animation
-function showSections() {
-var sections = document.querySelectorAll('.section');
-sections.forEach(function(section) {
-var position = section.getBoundingClientRect().top;
-var screenPosition = window.innerHeight * 0.9;
-if (position < screenPosition) {
-section.classList.add('show');
-}
+// Terminal
+let txt=["System Ready ✔","Access Granted","Welcome Boss 😎"];
+let l=0,c=0;
+(function term(){
+if(l<txt.length){
+if(c<txt[l].length){
+terminal.innerHTML+=txt[l][c++];
+setTimeout(term,30);
+}else{
+terminal.innerHTML+="<br>";l++;c=0;
+setTimeout(term,200);
+}}})();
+
+// Skills
+setTimeout(()=>{
+s1.style.width="40%";
+s2.style.width="90%";
+s3.style.width="20%";
+},800);
+
+// Particle
+let c=document.getElementById("bg"),ctx=c.getContext("2d");
+c.width=innerWidth;c.height=innerHeight;
+let p=[...Array(60)].map(()=>({
+x:Math.random()*c.width,
+y:Math.random()*c.height,
+vx:1,vy:1
+}));
+(function draw(){
+ctx.clearRect(0,0,c.width,c.height);
+p.forEach(d=>{
+ctx.fillStyle="cyan";
+ctx.fillRect(d.x,d.y,2,2);
+d.x+=d.vx;d.y+=d.vy;
+if(d.x<0||d.x>c.width)d.vx*=-1;
+if(d.y<0||d.y>c.height)d.vy*=-1;
 });
-}
+requestAnimationFrame(draw);
+})();
 
-window.addEventListener('load', showSections);
-window.addEventListener('scroll', showSections);
+// Chat
+chat-input.onkeypress=e=>{
+if(e.key==="Enter"){
+let v=e.target.value;
+chat-body.innerHTML+=`<div>🧑 ${v}</div>`;
+let r="🤖 Busy 😎";
+if(v.includes("hi")) r="🤖 Hello Boss";
+if(v.includes("name")) r="🤖 Flash Forhad Bot ⚡";
+setTimeout(()=>{
+chat-body.innerHTML+=`<div>${r}</div>`;
+chat-body.scrollTop=9999;
+},500);
+e.target.value="";
+}
+};
 </script>
 
 </body>
