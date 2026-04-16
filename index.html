@@ -13,7 +13,6 @@ color:white;
 text-align:center;
 }
 
-/* Container */
 .container{
 max-width:500px;
 margin:auto;
@@ -30,17 +29,13 @@ border:3px solid cyan;
 box-shadow:0 0 20px cyan;
 animation:float 3s infinite;
 }
-
-@keyframes float{
-50%{transform:translateY(-10px)}
-}
+@keyframes float{50%{transform:translateY(-10px)}}
 
 /* Section */
 .section{
 margin-top:25px;
 animation:fade 1s ease;
 }
-
 @keyframes fade{
 from{opacity:0;transform:translateY(20px)}
 to{opacity:1}
@@ -83,7 +78,6 @@ transition:.3s;
 transform:scale(1.05);
 box-shadow:0 0 10px cyan;
 }
-
 .email{background:#ff4d4d;}
 .whatsapp{background:#25D366;}
 .telegram{background:#0088cc;}
@@ -91,10 +85,23 @@ box-shadow:0 0 10px cyan;
 .instagram{background:linear-gradient(45deg,#feda75,#d62976);}
 .tiktok{background:black;border:1px solid cyan;}
 
-/* Chat */
-#chat{
+/* Chat Button */
+#chat-toggle{
 position:fixed;
-bottom:10px;
+bottom:15px;
+right:15px;
+background:cyan;
+border:none;
+padding:12px;
+border-radius:50%;
+font-size:18px;
+}
+
+/* Chat Box */
+#chat{
+display:none;
+position:fixed;
+bottom:70px;
 right:10px;
 width:240px;
 background:black;
@@ -195,17 +202,21 @@ Village: Dhamor Gachbari
 
 </div>
 
-<!-- CHAT -->
+<!-- Chat Button -->
+<button id="chat-toggle">💬</button>
+
+<!-- Chat -->
 <div id="chat">
 <div id="chat-body"></div>
 
 <div id="chat-box">
-<input id="chat-input" placeholder="Type...">
+<input id="chat-input" placeholder="Type command...">
 <button id="send-btn">➤</button>
 </div>
 </div>
 
 <script>
+
 // Skills animation
 setTimeout(()=>{
 s1.style.width="40%";
@@ -213,14 +224,20 @@ s2.style.width="90%";
 s3.style.width="20%";
 },500);
 
-// Fake visitor increase
+// Fake visitor
 let c=1245;
 setInterval(()=>{
 c++;
 document.getElementById("count").innerText=c;
 },3000);
 
-// Chat function
+// Toggle chat
+document.getElementById("chat-toggle").onclick=function(){
+let chat=document.getElementById("chat");
+chat.style.display = chat.style.display==="none"?"block":"none";
+};
+
+// Command Bot
 function sendMsg(){
 let input=document.getElementById("chat-input");
 let body=document.getElementById("chat-body");
@@ -230,25 +247,26 @@ if(v==="") return;
 
 body.innerHTML+=`<div>🧑 ${v}</div>`;
 
-let r="🤖 Ok Boss 😎";
+let r="🤖 Forhad Boss ke message daw 😎";
 
-if(v.includes("hi")) r="🤖 Hello Boss 🔥";
-else if(v.includes("name")) r="🤖 Flash Forhad ⚡";
-else if(v.includes("help")) r="🤖 Ki help lagbe bolo";
-else if(v.includes("kemon")) r="🤖 Ami valo asi 😎";
+if(v==="hi") r="🤖 Hello Boss 😎";
+else if(v==="name") r="🤖 Flash Forhad ⚡";
+else if(v==="help") r="🤖 Command use koro (hi, name, help)";
 
 setTimeout(()=>{
 body.innerHTML+=`<div>${r}</div>`;
 body.scrollTop=9999;
-},400);
+},300);
 
 input.value="";
 }
 
 document.getElementById("send-btn").onclick=sendMsg;
+
 document.getElementById("chat-input").addEventListener("keypress",function(e){
 if(e.key==="Enter") sendMsg();
 });
+
 </script>
 
 </body>
